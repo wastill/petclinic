@@ -8,6 +8,6 @@ type PetClinicRestService struct {
 	pb.UnimplementedPetClinicRestServiceServer
 }
 
-func NewPetClinicServiceService() *PetClinicRestService {
+func NewPetClinicRestService() *PetClinicRestService {
 	return &PetClinicRestService{}
 }

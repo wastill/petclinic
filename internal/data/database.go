@@ -6,7 +6,7 @@ package data
 //	"entgo.io/ent/dialect/sql/schema"
 //	"github.com/go-kratos/kratos/v2/config"
 //	"log"
-//	pkgent "petclinic/internal/data/ent"
+//	pkgent "github.com/wastill/petclinic/internal/data/ent"
 //)
 //
 //func NewEnt(cfg config.Config) *ent.Client {

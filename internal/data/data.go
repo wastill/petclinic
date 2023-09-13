@@ -1,7 +1,7 @@
 package data
 
 import (
-	"petclinic/internal/conf"
+	"github.com/wastill/petclinic/internal/conf"
 
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/google/wire"

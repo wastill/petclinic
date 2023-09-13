@@ -1,7 +1,7 @@
 syntax = "proto3";
 package kratos.api;
 
-option go_package = "petclinic/internal/conf;conf";
+option go_package = "github.com/wastill/petclinic/internal/conf;conf";
 
 import "google/protobuf/duration.proto";
 
@@ -29,6 +29,7 @@ message Data {
   message Database {
     string driver = 1;
     string source = 2;
+    string password = 3;
   }
   message Redis {
     string network = 1;

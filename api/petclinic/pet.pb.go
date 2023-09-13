@@ -8,7 +8,7 @@ package petclinic
 
 import (
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
-	common "github.com/wastill/petclinic/api_proto/common"
+	common "github.com/wastill/petclinic/api/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"

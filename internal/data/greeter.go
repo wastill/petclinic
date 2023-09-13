@@ -3,7 +3,7 @@ package data
 import (
 	"context"
 
-	"petclinic/internal/biz"
+	"github.com/wastill/petclinic/internal/biz"
 
 	"github.com/go-kratos/kratos/v2/log"
 )

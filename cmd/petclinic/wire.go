@@ -6,11 +6,9 @@
 package main
 
 import (
-	"petclinic/internal/biz"
-	"petclinic/internal/conf"
-	"petclinic/internal/data"
-	"petclinic/internal/server"
-	"petclinic/internal/service"
+	"github.com/wastill/petclinic/internal/conf"
+	"github.com/wastill/petclinic/internal/server"
+	"github.com/wastill/petclinic/internal/service"
 
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"
@@ -19,5 +17,6 @@ import (
 
 // wireApp init kratos application.
 func wireApp(*conf.Server, *conf.Data, log.Logger) (*kratos.App, func(), error) {
-	panic(wire.Build(server.ProviderSet, data.ProviderSet, biz.ProviderSet, service.ProviderSet, newApp))
+	panic(wire.Build(server.ProviderSet, service.ProviderSet, newApp))
+	//panic(wire.Build(server.ProviderSet, data.ProviderSet, biz.ProviderSet, service.ProviderSet, newApp))
 }
