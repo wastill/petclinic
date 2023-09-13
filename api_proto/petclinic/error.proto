@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package api.petclinic;
+
+import "errors/errors.proto";
+
+option go_package = "github.com/wastill/petclinic/api_proto/petclinic;petclinic";
+
+
+enum ErrorReason {
+  option (errors.default_code) = 500;
+
+  // 数据库异常
+  DATABASE_ERROR = 0 [(errors.code) = 500];
+}

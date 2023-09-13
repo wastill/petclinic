@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package api.petclinic;
+
+option go_package = "github.com/wastill/petclinic/api_proto/petclinic;petclinic";
+option java_multiple_files = true;
+option java_package = "api.petclinic";
+
+service VetSpeciality {
+	rpc CreateVetSpeciality (CreateVetSpecialityRequest) returns (CreateVetSpecialityReply);
+	rpc UpdateVetSpeciality (UpdateVetSpecialityRequest) returns (UpdateVetSpecialityReply);
+	rpc DeleteVetSpeciality (DeleteVetSpecialityRequest) returns (DeleteVetSpecialityReply);
+	rpc GetVetSpeciality (GetVetSpecialityRequest) returns (GetVetSpecialityReply);
+	rpc ListVetSpeciality (ListVetSpecialityRequest) returns (ListVetSpecialityReply);
+}
+
+message CreateVetSpecialityRequest {}
+message CreateVetSpecialityReply {}
+
+message UpdateVetSpecialityRequest {}
+message UpdateVetSpecialityReply {}
+
+message DeleteVetSpecialityRequest {}
+message DeleteVetSpecialityReply {}
+
+message GetVetSpecialityRequest {}
+message GetVetSpecialityReply {}
+
+message ListVetSpecialityRequest {}
+message ListVetSpecialityReply {}

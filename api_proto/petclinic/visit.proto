@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package api.petclinic;
+
+import "google/protobuf/timestamp.proto";
+import "validate/validate.proto";
+import "common/page.proto";
+
+option go_package = "github.com/wastill/petclinic/api_proto/petclinic;petclinic";
+option java_multiple_files = true;
+option java_package = "api.petclinic";
+
+
+message CreateVisitRequest {
+
+	int32 pet_id = 2[(validate.rules).int64 = {gt: 0}];
+
+	google.protobuf.Timestamp birth_date = 3;
+
+	string description = 4;
+}
+message CreateVisitReply {
+	Visit visit = 1;
+}
+
+message UpdateVisitRequest {
+	int32 id = 1[(validate.rules).int64 = {gt: 0}];
+	int32 pet_id = 2[(validate.rules).int64 = {gt: 0}];
+	google.protobuf.Timestamp birth_date = 3;
+	string description = 4;
+}
+message UpdateVisitReply {
+	Visit visit = 1;
+}
+
+message DeleteVisitRequest {
+	int32 id = 1[(validate.rules).int64 = {gt: 0}];
+}
+message DeleteVisitReply {
+	Visit visit = 1;
+}
+
+message GetVisitRequest {
+	int32 id = 1[(validate.rules).int64 = {gt: 0}];
+}
+message GetVisitReply {
+	Visit visit = 1;
+}
+
+message ListVisitRequest {
+	int32 page_num = 1;
+	int32 page_size = 2;
+}
+message ListVisitReply {
+	common.Page page = 1;
+	repeated Visit data = 2;
+}
+
+message Visit {
+	int32 id = 1;
+	int32 pet_id = 2;
+	google.protobuf.Timestamp birth_date = 3;
+	string description = 4;
+}

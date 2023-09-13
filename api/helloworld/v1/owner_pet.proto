@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package api.helloworld.v1;
+
+option go_package = "github.com/wastill/petclinic/api/helloworld/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.helloworld.v1";
+
+service OwnerPet {
+	rpc CreateOwnerPet (CreateOwnerPetRequest) returns (CreateOwnerPetReply);
+	rpc UpdateOwnerPet (UpdateOwnerPetRequest) returns (UpdateOwnerPetReply);
+	rpc DeleteOwnerPet (DeleteOwnerPetRequest) returns (DeleteOwnerPetReply);
+	rpc GetOwnerPet (GetOwnerPetRequest) returns (GetOwnerPetReply);
+	rpc ListOwnerPet (ListOwnerPetRequest) returns (ListOwnerPetReply);
+}
+
+message CreateOwnerPetRequest {}
+message CreateOwnerPetReply {}
+
+message UpdateOwnerPetRequest {}
+message UpdateOwnerPetReply {}
+
+message DeleteOwnerPetRequest {}
+message DeleteOwnerPetReply {}
+
+message GetOwnerPetRequest {}
+message GetOwnerPetReply {}
+
+message ListOwnerPetRequest {}
+message ListOwnerPetReply {}

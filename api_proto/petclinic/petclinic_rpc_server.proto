@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+
+package api.petclinic;
+
+//import "google/api/annotations.proto";
+//import "protoc-gen-openapiv2/options/annotations.proto";
+
+//
+//import "petclinic/owner.proto";
+//import "petclinic/pet_type.proto";
+//import "petclinic/pet.proto";
+//import "petclinic/visit.proto";
+
+option go_package = "github.com/wastill/petclinic/api_proto/petclinic;petclinic";
+
+service PetClinicRPCService {
+//
+//  // =========================== owner start =======================================
+//  rpc CreateOwner (api.petclinic.CreateOwnerRequest) returns (api.petclinic.CreateOwnerReply);
+
+}

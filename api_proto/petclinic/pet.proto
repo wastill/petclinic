@@ -1,0 +1,120 @@
+syntax = "proto3";
+
+package api.petclinic;
+
+import "google/protobuf/timestamp.proto";
+import "validate/validate.proto";
+
+
+import "common/page.proto";
+import "petclinic/visit.proto";
+
+option go_package = "github.com/wastill/petclinic/api_proto/petclinic;petclinic";
+option java_multiple_files = true;
+option java_package = "api.petclinic";
+
+
+message CreatePetRequest {
+	string name = 2[(validate.rules).string = {min_len: 1, max_len: 30}]; // the name of string must be between 1 and 30 character
+
+	google.protobuf.Timestamp birth_date = 3;
+
+	int32 type_id = 4;
+
+	int32 owner_id = 5;
+}
+
+message CreatePetReply {
+	Pet pet = 1;
+}
+
+message UpdatePetRequest {
+
+	int32 id = 1 [(validate.rules).int64 = {gt: 0}];
+
+	string name = 2[(validate.rules).string = {min_len: 1, max_len: 30}]; // the name of string must be between 1 and 30 character
+
+	google.protobuf.Timestamp birth_date = 3;
+
+	int32 type_id = 4;
+
+	int32 owner_id = 5;
+}
+message UpdatePetReply {
+	Pet pet = 1;
+}
+
+message DeletePetRequest {
+
+	int32 id = 1 [(validate.rules).int64 = {gt: 0}];
+}
+message DeletePetReply {
+	int32 row_effect = 1;
+}
+
+message GetPetRequest {
+	int32 id = 1 [(validate.rules).int64 = {gt: 0}];}
+message GetPetReply {
+	Pet pet = 1;
+}
+
+message ListPetRequest {
+	int32 page_num = 1;
+	int32 page_size = 2;
+}
+
+message ListPetReply {
+	common.Page page = 1;
+	repeated Pet data = 2;
+}
+
+
+message Pet {
+
+	int32 id = 1;
+
+	string name = 2;
+
+	google.protobuf.Timestamp birth_date = 3;
+
+	int32 type_id = 4;
+
+	int32 owner_id = 5;
+
+	repeated api.petclinic.Visit visits = 6;
+}
+
+
+// ==================== owner pet ======================
+message CreateOwnerPetRequest {
+	int32 owner_id = 1;
+	repeated int32 pet_id = 2;
+}
+
+message CreateOwnerPetReply {
+	OwnerPets owner_pets = 1;
+}
+
+
+message DeleteOwnerPetRequest {
+	int32 owner_id = 1;
+	repeated int32 pet_id = 2;
+}
+message DeleteOwnerPetReply {
+	OwnerPets owner_pets = 1;
+}
+
+message GetOwnerPetRequest {
+	int32 owner_id = 1;
+}
+message GetOwnerPetReply {
+	OwnerPets owner_pets = 1;
+}
+
+
+message OwnerPets {
+
+	int32 owner_id = 1;
+
+	repeated Pet pets = 2;
+}

@@ -1,0 +1,298 @@
+syntax = "proto3";
+
+
+package api.petclinic;
+
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+
+import "petclinic/owner.proto";
+import "petclinic/pet_type.proto";
+import "petclinic/pet.proto";
+import "petclinic/visit.proto";
+
+option go_package = "github.com/wastill/petclinic/api_proto/petclinic;petclinic";
+option java_multiple_files = true;
+option java_package = "api.petclinic";
+
+
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {
+    title: "pet clinic examples";
+    version: "1.0";
+    contact: {
+      name: "gRPC-Gateway project";
+      url: "https://github.com/grpc-ecosystem/grpc-gateway";
+      email: "none@example.com";
+    };
+    license: {
+      name: "BSD 3-Clause License";
+      url: "https://github.com/grpc-ecosystem/grpc-gateway/blob/master/LICENSE.txt";
+    };
+    extensions: {
+      key: "x-something-something";
+      value {
+        string_value: "yadda";
+      }
+    }
+  };
+};
+
+
+service PetClinicRestService {
+
+  // =========================== owner start =======================================
+  rpc CreateOwner (api.petclinic.CreateOwnerRequest) returns (api.petclinic.CreateOwnerReply) {
+    option (google.api.http) = {
+      post: "/petclinic/owner"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "create a owner";
+      tags: "Owner";
+    };
+  };
+
+  rpc UpdateOwner (api.petclinic.UpdateOwnerRequest) returns (api.petclinic.UpdateOwnerReply){
+    option (google.api.http) = {
+      put: "/petclinic/owner/{id}"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "update the owner ";
+      tags: "Owner";
+    };
+  };
+
+  rpc DeleteOwner (api.petclinic.DeleteOwnerRequest) returns (api.petclinic.DeleteOwnerReply) {
+    option (google.api.http) = {
+      delete: "/petclinic/owner/{id}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "delete the owner";
+      tags: "Owner";
+
+    };
+  };
+  rpc GetOwner (api.petclinic.GetOwnerRequest) returns (api.petclinic.GetOwnerReply){
+    option (google.api.http) = {
+      get: "/petclinic/owner/{id}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "get the owner details by id";
+      tags: "Owner";
+    };
+  };
+  rpc ListOwner (api.petclinic.ListOwnerRequest) returns (api.petclinic.ListOwnerReply){
+    option (google.api.http) = {
+      get: "/petclinic/owners"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "query owner list";
+      tags: "Owner";
+    };
+  };
+
+  // =========================== owner end =======================================
+
+
+  // =========================== pet type start =======================================
+  rpc CreatePetType (api.petclinic.CreatePetTypeRequest) returns (api.petclinic.CreatePetTypeReply) {
+    option (google.api.http) = {
+      post: "/petclinic/pet_type"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "create a pet_type";
+      tags: "PetType";
+    };
+  };
+
+  rpc UpdatePetType (api.petclinic.UpdatePetTypeRequest) returns (api.petclinic.UpdatePetTypeReply){
+    option (google.api.http) = {
+      put: "/petclinic/pet_type/{id}"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "update the pet_type ";
+      tags: "PetType";
+    };
+  };
+
+  rpc DeletePetType (api.petclinic.DeletePetTypeRequest) returns (api.petclinic.DeletePetTypeReply) {
+    option (google.api.http) = {
+      delete: "/petclinic/pet_type/{id}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "delete the pet_type";
+      tags: "PetType";
+
+    };
+  };
+  rpc GetPetType (api.petclinic.GetPetTypeRequest) returns (api.petclinic.GetPetTypeReply){
+    option (google.api.http) = {
+      get: "/petclinic/pet_type/{id}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "get the pet_type details by id";
+      tags: "PetType";
+    };
+  };
+  rpc ListPetType (api.petclinic.ListPetTypeRequest) returns (api.petclinic.ListPetTypeReply){
+    option (google.api.http) = {
+      get: "/petclinic/pet_types"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "query pet_type list";
+      tags: "PetType";
+    };
+  };
+  // =========================== pet type end =======================================
+
+  // =========================== visit start =======================================
+  rpc CreateVisit (api.petclinic.CreateVisitRequest) returns (api.petclinic.CreateVisitReply) {
+    option (google.api.http) = {
+      post: "/petclinic/visit"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "create a visit";
+      tags: "Visit";
+    };
+  };
+
+  rpc UpdateVisit (api.petclinic.UpdateVisitRequest) returns (api.petclinic.UpdateVisitReply){
+    option (google.api.http) = {
+      put: "/petclinic/visit/{id}"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "update the visit ";
+      tags: "Visit";
+    };
+  };
+
+  rpc DeleteVisit (api.petclinic.DeleteVisitRequest) returns (api.petclinic.DeleteVisitReply) {
+    option (google.api.http) = {
+      delete: "/petclinic/visit/{id}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "delete the visit";
+      tags: "Visit";
+
+    };
+  };
+  rpc GetVisit (api.petclinic.GetVisitRequest) returns (api.petclinic.GetVisitReply){
+    option (google.api.http) = {
+      get: "/petclinic/visit/{id}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "get the visit details by id";
+      tags: "Visit";
+    };
+  };
+  rpc ListVisit (api.petclinic.ListVisitRequest) returns (api.petclinic.ListVisitReply){
+    option (google.api.http) = {
+      get: "/petclinic/visits"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "query visit list";
+      tags: "visit";
+    };
+  };
+  // =========================== visit end =======================================
+
+  // =========================== pet start =======================================
+  rpc CreatePet (api.petclinic.CreatePetRequest) returns (api.petclinic.CreatePetReply) {
+    option (google.api.http) = {
+      post: "/petclinic/pet"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "create a pet";
+      tags: "Pet";
+    };
+  };
+
+  rpc UpdatePet (api.petclinic.UpdatePetRequest) returns (api.petclinic.UpdatePetReply){
+    option (google.api.http) = {
+      put: "/petclinic/pet/{id}"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "update the pet ";
+      tags: "Pet";
+    };
+  };
+
+  rpc DeletePet (api.petclinic.DeletePetRequest) returns (api.petclinic.DeletePetReply) {
+    option (google.api.http) = {
+      delete: "/petclinic/pet/{id}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "delete the pet";
+      tags: "Pet";
+
+    };
+  };
+  rpc GetPet (api.petclinic.GetPetRequest) returns (api.petclinic.GetPetReply){
+    option (google.api.http) = {
+      get: "/petclinic/pet/{id}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "get the pet details by id";
+      tags: "Pet";
+    };
+  };
+  rpc ListPet (api.petclinic.ListPetRequest) returns (api.petclinic.ListPetReply){
+    option (google.api.http) = {
+      get: "/petclinic/pets"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "query pet list";
+      tags: "Pet";
+    };
+  };
+
+  rpc CreateOwnerPet (api.petclinic.CreateOwnerPetRequest) returns (api.petclinic.CreateOwnerPetReply) {
+    option (google.api.http) = {
+      post: "/petclinic/owner/{owner_id}/pet"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "create a pet for owner";
+      tags: "Pet";
+    };
+  };
+
+  rpc DeleteOwnerPet (api.petclinic.DeleteOwnerPetRequest) returns (api.petclinic.DeleteOwnerPetReply) {
+    option (google.api.http) = {
+      delete: "/petclinic/owner/{owner_id}/pet"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "delete the pet for owner";
+      tags: "Pet";
+
+    };
+  };
+  rpc GetOwnerPet (api.petclinic.GetOwnerPetRequest) returns (api.petclinic.GetOwnerPetReply){
+    option (google.api.http) = {
+      get: "/petclinic/owner/{owner_id}/pets"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "get the owner's pet details";
+      tags: "Pet";
+    };
+  };
+  // =========================== pet end =======================================
+
+  // =========================== pet start =======================================
+  // =========================== pet end =======================================
+
+  // =========================== pet start =======================================
+  // =========================== pet end =======================================
+
+}
+

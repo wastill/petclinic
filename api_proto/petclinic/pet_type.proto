@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package api.petclinic;
+
+import "validate/validate.proto";
+import "common/page.proto";
+
+option go_package = "github.com/wastill/petclinic/api_proto/petclinic;petclinic";
+
+
+message CreatePetTypeRequest {
+	string name = 2 [(validate.rules).string = {min_len: 1, max_len: 80}]; // the name of string must be between 1 and 80 character
+
+}
+message CreatePetTypeReply {
+	PetType pet_type = 1;
+}
+
+message UpdatePetTypeRequest {
+	int32 id = 1 [(validate.rules).int64 = {gt: 0}];
+	string name = 2 [(validate.rules).string = {min_len: 1, max_len: 80}]; // the name of string must be between 1 a
+}
+message UpdatePetTypeReply {
+	PetType pet_type = 1;
+}
+
+message DeletePetTypeRequest {
+	int32 id = 1 [(validate.rules).int64 = {gt: 0}];
+
+}
+message DeletePetTypeReply {
+	int32 row_effect = 1;
+}
+
+message GetPetTypeRequest {
+	int32 id = 1 [(validate.rules).int64 = {gt: 0}];
+
+}
+message GetPetTypeReply {
+	PetType pet_type = 1;
+}
+
+message ListPetTypeRequest {
+	int32 page_num = 1;
+	int32 page_size = 2;
+}
+message ListPetTypeReply {
+	common.Page page = 1;
+	repeated PetType data = 2;
+}
+
+
+message PetType {
+	int32 id = 1;
+	string name = 2;
+}

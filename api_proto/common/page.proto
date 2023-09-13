@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package api.common;
+
+
+option go_package = "github.com/wastill/petclinic/api_proto/common;common";
+option java_multiple_files = true;
+option java_package = "api.common";
+
+
+message Page {
+  // 当前页码
+  int64 page_num = 1;
+  // 每页条数
+  int64 page_size = 2;
+  // 总页数
+  int64 page_total = 3;
+  // 总条数
+  int64 total_count = 4;
+}
