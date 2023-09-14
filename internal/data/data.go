@@ -1,24 +1,43 @@
 package data
 
 import (
-	"github.com/wastill/petclinic/internal/conf"
+	"context"
+	"github.com/wastill/petclinic/internal/data/ent"
 
 	"github.com/go-kratos/kratos/v2/log"
-	"github.com/google/wire"
+	"github.com/go-redis/redis/v8"
+	//
+	//// init mysql driver
+	//_ "github.com/go-sql-driver/mysql"
 )
-
-// ProviderSet is data providers.
-var ProviderSet = wire.NewSet(NewData, NewGreeterRepo)
 
 // Data .
 type Data struct {
-	// TODO wrapped database client
+	db  *ent.Client
+	rdb *redis.Client
 }
 
 // NewData .
-func NewData(c *conf.Data, logger log.Logger) (*Data, func(), error) {
-	cleanup := func() {
-		log.NewHelper(logger).Info("closing the data resources")
+func NewData(client *ent.Client, rdb *redis.Client, logger log.Logger) (*Data, func(), error) {
+	log := log.NewHelper(logger)
+
+	// Run the auto migration tool.
+	if err := client.Schema.Create(context.Background()); err != nil {
+		log.Errorf("failed creating schema resources: %v", err)
+		return nil, nil, err
 	}
-	return &Data{}, cleanup, nil
+
+	d := &Data{
+		db:  client,
+		rdb: rdb,
+	}
+	return d, func() {
+		log.Info("message", "closing the data resources")
+		if err := d.db.Close(); err != nil {
+			log.Error(err)
+		}
+		if err := d.rdb.Close(); err != nil {
+			log.Error(err)
+		}
+	}, nil
 }

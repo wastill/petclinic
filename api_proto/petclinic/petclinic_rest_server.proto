@@ -11,6 +11,7 @@ import "petclinic/owner.proto";
 import "petclinic/pet_type.proto";
 import "petclinic/pet.proto";
 import "petclinic/visit.proto";
+import "petclinic/user.proto";
 
 option go_package = "github.com/wastill/petclinic/api_proto/petclinic;petclinic";
 option java_multiple_files = true;
@@ -279,7 +280,7 @@ service PetClinicRestService {
   };
   rpc GetOwnerPet (api.petclinic.GetOwnerPetRequest) returns (api.petclinic.GetOwnerPetReply){
     option (google.api.http) = {
-      get: "/petclinic/owner/{owner_id}/pets"
+      get: "/petclinic/owner/{owner_id}/pet"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       summary: "get the owner's pet details";
@@ -291,8 +292,81 @@ service PetClinicRestService {
   // =========================== pet start =======================================
   // =========================== pet end =======================================
 
-  // =========================== pet start =======================================
-  // =========================== pet end =======================================
+  // =========================== user start =======================================
+
+  // =========================== user end =======================================
+
+
+
+  rpc UpdateUser (api.petclinic.UpdateUserRequest) returns (api.petclinic.UpdateUserReply){
+    option (google.api.http) = {
+      put: "/petclinic/user/{username}"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "update the user's details";
+      tags: "User";
+    };
+  };
+
+  rpc GetUser (api.petclinic.GetUserRequest) returns (api.petclinic.GetUserReply){
+    option (google.api.http) = {
+      get: "/petclinic/owner/{username}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "get the user's details";
+      tags: "User";
+    };
+  };
+
+  rpc ListUser (api.petclinic.ListUserRequest) returns (api.petclinic.ListUserReply){
+    option (google.api.http) = {
+      get: "/petclinic/users"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "get user list";
+      tags: "User";
+    };
+  };
+
+  // =========================== auth start =======================================
+  rpc Register (api.petclinic.CreateUserRequest) returns (api.petclinic.CreateUserReply){
+    option (google.api.http) = {
+      post: "/petclinic/auth/register"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "register user";
+      tags: "Auth";
+    };
+  };
+  rpc Login (api.petclinic.LoginRequest) returns (api.petclinic.LoginReply){
+    option (google.api.http) = {
+      post: "/petclinic/auth/login"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "login the system";
+      tags: "Auth";
+    };
+  };
+
+
+  rpc CurrentUser (api.petclinic.GetCurrentUserRequest) returns (api.petclinic.GetCurrentUserReply){
+    option (google.api.http) = {
+      get: "/petclinic/auth/current_user"
+    };
+
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "get current user by token.";
+      tags: "Auth";
+    };
+  };
+
+
+  // =========================== auth end =======================================
+
+
 
 }
 

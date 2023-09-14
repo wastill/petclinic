@@ -31,6 +31,6 @@ func NewHTTPServer(c *conf.Server, petclinic *service.PetClinicRestService, logg
 	h := openapiv2.NewHandler()
 	//将/q/路由放在最前匹配
 	srv.HandlePrefix("/q/", h)
-	v1.RegisterOwnerServiceHTTPServer(srv, petclinic)
+	v1.RegisterPetClinicRestServiceHTTPServer(srv, petclinic)
 	return srv
 }

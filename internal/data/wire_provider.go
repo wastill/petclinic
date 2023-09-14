@@ -5,4 +5,9 @@ package data
 
 import "github.com/google/wire"
 
-var WireProviderSet = wire.NewSet()
+var ProviderSet = wire.NewSet(
+	NewEnt,
+	NewData,
+	NewRDBClient,
+	NewUserRepo,
+)
