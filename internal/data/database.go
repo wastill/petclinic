@@ -9,14 +9,15 @@ import (
 	"log"
 )
 
-func NewEnt(cfg *config.Data) *ent.Client {
-	dbDrvier, err := pkgent.InitDatabaseDriver(cfg.Database.Driver, cfg.Database.Source)
+func NewEnt(cfg *config.Bootstrap) *ent.Client {
+	dbDrvier, err := pkgent.InitDatabaseDriver(cfg.Data.Database.Driver, cfg.Data.Database.Source)
+	dbDrvier.DB()
 	if err != nil {
 		log.Fatal("database init err: " + err.Error())
 	}
 	// init ent
 	db := ent.NewClient(ent.Driver(dbDrvier))
-	if cfg.Database.AutoMigrate {
+	if cfg.Data.Database.AutoMigrate {
 		// Run the auto migration tool.
 		if err = db.Schema.Create(
 			context.Background(),
@@ -29,5 +30,6 @@ func NewEnt(cfg *config.Data) *ent.Client {
 		}
 	}
 
+	db.User.Update().Where()
 	return db
 }

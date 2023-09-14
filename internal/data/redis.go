@@ -5,13 +5,13 @@ import (
 	"github.com/wastill/petclinic/internal/conf"
 )
 
-func NewRDBClient(conf *conf.Data) *redis.Client {
+func NewRDBClient(conf *conf.Bootstrap) *redis.Client {
 	return redis.NewClient(&redis.Options{
-		Addr:         conf.Redis.Addr,
-		Password:     conf.Redis.Password,
-		DB:           int(conf.Redis.Db),
-		DialTimeout:  conf.Redis.DialTimeout.AsDuration(),
-		WriteTimeout: conf.Redis.WriteTimeout.AsDuration(),
-		ReadTimeout:  conf.Redis.ReadTimeout.AsDuration(),
+		Addr:         conf.Data.Redis.Addr,
+		Password:     conf.Data.Redis.Password,
+		DB:           int(conf.Data.Redis.Db),
+		DialTimeout:  conf.Data.Redis.DialTimeout.AsDuration(),
+		WriteTimeout: conf.Data.Redis.WriteTimeout.AsDuration(),
+		ReadTimeout:  conf.Data.Redis.ReadTimeout.AsDuration(),
 	})
 }

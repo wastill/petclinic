@@ -825,16 +825,8 @@ components:
         api.petclinic.LoginReply:
             type: object
             properties:
-                username:
+                authorization:
                     type: string
-                password:
-                    type: string
-                token:
-                    type: string
-                roles:
-                    type: array
-                    items:
-                        type: string
         api.petclinic.LoginRequest:
             type: object
             properties:

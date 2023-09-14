@@ -18,3 +18,5 @@ data:
     dial_timeout: 1s
     read_timeout: 1s
     write_timeout: 1s
+jwt:
+  valid_seconds: 999999999

@@ -12,10 +12,17 @@ func (s *PetClinicRestService) UpdatePet(ctx context.Context, req *pb.UpdatePetR
 	return &pb.UpdatePetReply{}, nil
 }
 func (s *PetClinicRestService) DeletePet(ctx context.Context, req *pb.DeletePetRequest) (*pb.DeletePetReply, error) {
-	return &pb.DeletePetReply{}, nil
+	return &pb.DeletePetReply{
+		RowEffect: 0,
+	}, nil
 }
 func (s *PetClinicRestService) GetPet(ctx context.Context, req *pb.GetPetRequest) (*pb.GetPetReply, error) {
-	return &pb.GetPetReply{}, nil
+	return &pb.GetPetReply{
+		Pet: &pb.Pet{
+			Id:   1,
+			Name: "lucky",
+		},
+	}, nil
 }
 func (s *PetClinicRestService) ListPet(ctx context.Context, req *pb.ListPetRequest) (*pb.ListPetReply, error) {
 	return &pb.ListPetReply{}, nil

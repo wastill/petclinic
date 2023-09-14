@@ -23,19 +23,19 @@ import (
 // Injectors from wire.go:
 
 // wireApp init kratos application.
-func wireApp(confServer *conf.Server, confData *conf.Data, logger log.Logger) (*kratos.App, func(), error) {
+func wireApp(bootstrap *conf.Bootstrap, logger log.Logger) (*kratos.App, func(), error) {
 	petClinicRpcService := service.NewPetClinicRPCService()
-	grpcServer := server.NewGRPCServer(confServer, petClinicRpcService, logger)
-	client := data.NewEnt(confData)
-	redisClient := data.NewRDBClient(confData)
+	grpcServer := server.NewGRPCServer(bootstrap, petClinicRpcService, logger)
+	client := data.NewEnt(bootstrap)
+	redisClient := data.NewRDBClient(bootstrap)
 	dataData, cleanup, err := data.NewData(client, redisClient, logger)
 	if err != nil {
 		return nil, nil, err
 	}
 	userRepo := data.NewUserRepo(dataData, logger)
 	userUseCase := biz.NewUserUseCase(userRepo, logger)
-	petClinicRestService := service.NewPetClinicRestService(userUseCase)
-	httpServer := server.NewHTTPServer(confServer, petClinicRestService, logger)
+	petClinicRestService := service.NewPetClinicRestService(bootstrap, userUseCase)
+	httpServer := server.NewHTTPServer(bootstrap, petClinicRestService, logger)
 	app := newApp(logger, grpcServer, httpServer)
 	return app, func() {
 		cleanup()
